@@ -16,7 +16,7 @@ def PosicionaBotao (tela, botao_anterior, botao_atual, direcao = Direcao.DIREITA
     
     posy = botao_anterior.winfo_y()    
     
-    botao_atual.place(x = posx, y = posy, width = 65)         
+    botao_atual.place(x = posx, y = posy, width = 90)         
 
 def clientes():
     exec(open("main\clientes.py", encoding="utf-8").read(),locals())
@@ -47,3 +47,19 @@ def MontaTela(cor_fundo, imagem, titulo, principal = False):
     label.pack()
     
     return tela
+
+def CriarBotao(tela, imagem, texto):
+    # root = tk.Tk()
+    # root.geometry('800x600')
+
+    # Carregar e redimensionar a imagem
+    imagem = Image.open(imagem)
+    imagem = imagem.resize((50, 50))  # Redimensione conforme necessário
+    tkimage = ImageTk.PhotoImage(imagem)
+
+    # Criar o botão com a imagem e o texto
+    botao = tk.Button(tela, text=texto, image=tkimage, compound='left', command=lambda: print("Botão clicado!"))
+    botao.image = tkimage  # Manter uma referência à imagem
+    botao.pack(pady=20)
+
+    # root.mainloop()

@@ -69,6 +69,10 @@ caminhoImagens = caminhoAplicacao.replace(r'/', "\\") + 'imagens\\'
 # -- Variáveis de Imagens ---    ############################
 img_desktop = f"{caminhoImagens}wallpaper2.jpg"
 img_background = f"{caminhoImagens}background.webp"
+icone_voltar = f"{caminhoImagens}voltar.png"
+icone_limpar = f"{caminhoImagens}limpar.png"
+icone_excluir = f"{caminhoImagens}excluir.png"
+icone_gravar = f"{caminhoImagens}gravar.png"
 
 QuebraLinha = "\n"
 

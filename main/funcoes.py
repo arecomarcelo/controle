@@ -1,9 +1,13 @@
+import os
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
 from enumeradores import Direcao
-from vars import nome_aplicacao
+from vars import nome_aplicacao, img_icone_principal
 
+def LimparConsole():
+    os.system('cls')
+    
 def PosicionaBotao (tela, botao_anterior, botao_atual, direcao = Direcao.DIREITA):
     tela.update_idletasks()
     
@@ -20,6 +24,15 @@ def PosicionaBotao (tela, botao_anterior, botao_atual, direcao = Direcao.DIREITA
 
 def clientes():
     exec(open("main\clientes.py", encoding="utf-8").read(),locals())
+    
+def produtos():
+    exec(open("main\produtos.py", encoding="utf-8").read(),locals())
+    
+def vendas():
+    exec(open("main\\vendas.py", encoding="utf-8").read(),locals())
+    
+def gestao():
+    exec(open("main\\gestao.py", encoding="utf-8").read(),locals())
     
 def sobre():
     messagebox.showinfo("Sobre", "Sistema Comercial 1.0")
@@ -40,12 +53,18 @@ def MontaTela(cor_fundo, imagem, titulo, principal = False):
     tela.state('zoomed')
     tela.title(f"{nome_aplicacao} - {titulo}")
     tela['bg'] = cor_fundo
+    
+    icone_imagem = Image.open(img_icone_principal)
+    icone_tkimage = ImageTk.PhotoImage(icone_imagem)
 
+    # Definir Ícone Tela
+    tela.iconphoto(False, icone_tkimage)
     tkimage = ImageTk.PhotoImage(Image.open(imagem).resize((tela.winfo_screenwidth(), tela.winfo_screenheight())))
     label = tk.Label(tela, image=tkimage)
-    label.image = tkimage  # Mantenha uma referência à imagem
+    label.image = tkimage
     label.pack()
-    
+    # Definir Ícone Tela
+
     return tela
 
 def CriarBotao(tela, imagem, texto):

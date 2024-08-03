@@ -1,0 +1,11 @@
+# btnmenu = tk.Button(tela_cli, text ="Menu", bg ='silver',foreground='black', font=('Roboto', 12), command=menu)
+# btnmenu.place(x = 445, y = 320, width = 65)
+
+# btnlimpar = tk.Button(tela_cli, text ="Limpar", bg ='silver',foreground='black', font=('Roboto', 12))
+# PosicionaBotao(tela_cli, btnmenu, btnlimpar)
+
+# btnexcluir = tk.Button(tela_cli, text ="Excluir", bg ='silver',foreground='black', font=('Roboto', 12))
+# PosicionaBotao(tela_cli, btnlimpar, btnexcluir)
+
+# btngravar = tk.Button(tela_cli, text ="Gravar", bg ='silver',foreground='black', font=('Roboto', 12))
+# PosicionaBotao(tela_cli, btnexcluir, btngravar)

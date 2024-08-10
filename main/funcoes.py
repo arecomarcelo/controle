@@ -22,17 +22,8 @@ def PosicionaBotao (tela, botao_anterior, botao_atual, direcao = Direcao.DIREITA
     
     botao_atual.place(x = posx, y = posy, width = 90)         
 
-def clientes():
-    exec(open("main\clientes.py", encoding="utf-8").read(),locals())
-    
-def produtos():
-    exec(open("main\produtos.py", encoding="utf-8").read(),locals())
-    
-def vendas():
-    exec(open("main\\vendas.py", encoding="utf-8").read(),locals())
-    
-def gestao():
-    exec(open("main\\gestao.py", encoding="utf-8").read(),locals())
+def AbreTela(arquivo):
+    exec(open(f"main\\{arquivo}", encoding="utf-8").read(),locals())
     
 def sobre():
     messagebox.showinfo("Sobre", "Sistema Comercial 1.0")
@@ -84,5 +75,5 @@ def CriarBotao(tela, imagem, texto):
     # root.mainloop()
 
 
-def fechar_tela(tela, event=None):
+def FecharTela(tela, event=None):
     tela.destroy()

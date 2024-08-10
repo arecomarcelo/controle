@@ -2,10 +2,11 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from PIL import Image, ImageTk
-from funcoes import clientes, sair, sobre, MontaTela, PosicionaBotao, CriarBotao, fechar_tela
+from funcoes import MontaTela, PosicionaBotao, FecharTela
 from vars import *
 import conexao as cn
 
+##Funcoes Internas
 def limpar():
     txtcodigo.delete(0,"end")
     txtnome.delete(0,"end")
@@ -43,8 +44,6 @@ def duplo_click(event):
     item = tree.item(tree.selection())
     txtcodigo.insert(0, item['values'][0])
     buscar()
-    
-  
     
 def visualizar():
     con=cn.conexao()
@@ -86,7 +85,6 @@ def gravar():
     var_email = txtemail.get()
     var_observacao = txtobservacao.get("1.0","end")
 
-
     con=cn.conexao()
     sql_txt = f"select codigo,nome,telefone,email,observacao from clientes where codigo = {var_codigo}"
 
@@ -120,7 +118,6 @@ def excluir():
               limpar()
         else:
             messagebox.showerror("Erro", "Houve um Erro na Exclusão",parent = tela_cli)
-
             
         con.fechar()
 
@@ -128,25 +125,22 @@ def excluir():
     else:
         limpar()
         
-cor = "WhiteSmoke"
-largura_caixa = 90
-
 def menu():
     tela_cli.destroy()
-        
+##Funcoes Internas
+
+##Configura Tela        
+largura_caixa = 90    
 tela_cli = MontaTela(cor, img_background,"Cadastro de Clientes", False)
 pes_nome = tela_cli.register(func=pesquisar_nome)
 
+#Definição dos Controles
 #Insere um Label - anchor w= esquerda, e=direita, c=centralizada
 lblcodigo = tk.Label(tela_cli, text ="Codigo:", bg="black", fg="WhiteSmoke", font=('Roboto', 12), anchor = "e")
 lblcodigo.place(x = 50, y = 60, width = largura_caixa,  height = 25)
 txtcodigo = tk.Entry(tela_cli, width = 35, font=('Roboto', 12))
 txtcodigo.place(x = 150, y = 60, width = 100, height = 25)
 txtcodigo.place(x = 150, y = 60, width = 100, height = 25)
-
-buscabtn = tk.Button(tela_cli, text ="Pesquisar", 
-                     bg ='white',foreground='black', font=('Roboto', 12, 'bold'), command = buscar)
-buscabtn.place(x = 280, y = 60, width = 90, height = 25)
 
 lblnome = tk.Label(tela_cli, text ="Nome:", bg="black", fg="WhiteSmoke", font=('Roboto', 12), anchor = "e")
 lblnome.place(x = 50, y = 100, width = largura_caixa, height = 25)
@@ -167,6 +161,16 @@ lblobservacao = tk.Label(tela_cli, text ="Observação:", bg="black", fg="WhiteS
 lblobservacao.place(x = 50, y = 220, width = largura_caixa, height = 25)
 txtobservacao= tk.Text(tela_cli, font=('Roboto', 12))#Permite Quebra de Linha, diferente do Entry
 txtobservacao.place(x=150, y=220, width=375, height=80)
+
+lbl_pes_nome = tk.Label(tela_cli, text ="Pesquisar por Nome :", font=('Roboto', 12, 'bold'), anchor = "w")
+lbl_pes_nome.place(x = 150, y = 380, width=200, height = 25)
+txt_pes_nome = tk.Entry(tela_cli, width = 35, font=('Roboto', 12),validate='key', validatecommand=(pes_nome,'%P'))
+txt_pes_nome.place(x = 315, y = 380, width = 360, height = 25)
+
+#Definição dos Botões
+buscabtn = tk.Button(tela_cli, text ="Pesquisar", 
+                     bg ='white',foreground='black', font=('Roboto', 12, 'bold'), command = buscar)
+buscabtn.place(x = 280, y = 60, width = 90, height = 25)
 
 #Botão Menu
 imagem = Image.open(icone_voltar)
@@ -198,11 +202,6 @@ btnexcluir.pack(pady=20)
 PosicionaBotao(tela_cli, btnlimpar, btnexcluir)
 #Botão Excluir
 
-lbl_pes_nome = tk.Label(tela_cli, text ="Pesquisar por Nome :", font=('Roboto', 12, 'bold'), anchor = "w")
-lbl_pes_nome.place(x = 150, y = 390, width=200, height = 25)
-txt_pes_nome = tk.Entry(tela_cli, width = 35, font=('Roboto', 12),validate='key', validatecommand=(pes_nome,'%P'))
-txt_pes_nome.place(x = 315, y = 390, width = 360, height = 25)
-
 #Botão Gravar
 imagem = Image.open(icone_gravar)
 imagem = imagem.resize((30, 30))
@@ -213,6 +212,7 @@ btngravar.pack(pady=20)
 PosicionaBotao(tela_cli, btnexcluir, btngravar)
 #Botão Gravar
 
+##Configuração Grid
 style = tk.ttk.Style()
 style.configure("mystyle.Treeview", font=("Roboto", 10))
 style.configure("mystyle.Treeview.Heading", font=("Roboto", 12, "bold"))
@@ -239,23 +239,25 @@ tree.column("#5")
 tree.heading("#5", text="Observação")
 tree.column("#5", width = 300, anchor ='c')
 
-tree.place(x=150,y=450,height=150)
+tree.place(x=150,y=430,height=150)
+##Configuração Grid
 
+##Configuração ScrollBar
 scrollbar = tk.ttk.Scrollbar(tela_cli, orient=tk.VERTICAL, command=tree.yview)
 tree.configure(yscroll=scrollbar.set)
-scrollbar.place(x = 982, y = 450,height=150)
+scrollbar.place(x = 982, y = 430,height=150)
+##Configuração ScrollBar
 
-
+##Ações Inicializar
 visualizar()
-
 txtcodigo.focus_set()
 
+##Configura Atalhos
 tela_cli.bind_all("<Alt-m>", lambda e: menu())
 tela_cli.bind_all("<Alt-l>", lambda e: limpar())
 tela_cli.bind_all("<Alt-e>", lambda e: excluir())
 tela_cli.bind_all("<Alt-g>", lambda e: gravar())
-
-tela_cli.bind('<Escape>', lambda event: fechar_tela(tela_cli))
+tela_cli.bind('<Escape>', lambda event: FecharTela(tela_cli))
 
 #Mantêm a tela_cli em Execução
 tela_cli.mainloop()

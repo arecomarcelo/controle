@@ -2,7 +2,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
-from funcoes import clientes, sair, sobre, MontaTela, PosicionaBotao, CriarBotao, fechar_tela
+from funcoes import MontaTela, PosicionaBotao, CriarBotao, FecharTela
 from vars import *
 
 cor = "WhiteSmoke"
@@ -23,7 +23,7 @@ btnmenu.pack(pady=20)
 btnmenu.place(x = 5, y = 10, width = 90)
 #Botão Menu
 
-tela_gestao.bind('<Escape>', lambda event: fechar_tela(tela_gestao))
+tela_gestao.bind('<Escape>', lambda event: FecharTela(tela_gestao))
 
 #Mantêm a tela_cli em Execução
 tela_gestao.mainloop()

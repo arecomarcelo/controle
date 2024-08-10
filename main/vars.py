@@ -79,5 +79,9 @@ icone_gravar = f"{caminhoImagens}gravar.png"
 QuebraLinha = "\n"
 
 nome_aplicacao = "Sistema Comercial 1.0"
+cor = "WhiteSmoke"
+cor_fundo="black"
+cor_fonte="WhiteSmoke"
+fonte = "Roboto"
 
 

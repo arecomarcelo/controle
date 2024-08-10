@@ -82,3 +82,7 @@ def CriarBotao(tela, imagem, texto):
     botao.pack(pady=20)
 
     # root.mainloop()
+
+
+def fechar_tela(tela, event=None):
+    tela.destroy()

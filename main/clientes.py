@@ -2,7 +2,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from PIL import Image, ImageTk
-from funcoes import clientes, sair, sobre, MontaTela, PosicionaBotao, CriarBotao
+from funcoes import clientes, sair, sobre, MontaTela, PosicionaBotao, CriarBotao, fechar_tela
 from vars import *
 import conexao as cn
 
@@ -172,7 +172,7 @@ txtobservacao.place(x=150, y=220, width=375, height=80)
 imagem = Image.open(icone_voltar)
 imagem = imagem.resize((30, 30))
 tkimage = ImageTk.PhotoImage(imagem)
-btnmenu = tk.Button(tela_cli, text ="Menu",image=tkimage, compound='left', foreground='black', font=('Roboto', 12), command=menu)
+btnmenu = tk.Button(tela_cli, text ="Menu",image=tkimage, compound='left', foreground='black', font=('Roboto', 12), command=menu, underline=0)
 btnmenu.image = tkimage
 btnmenu.pack(pady=20)
 btnmenu.place(x = 435, y = 320, width = 90)
@@ -182,7 +182,7 @@ btnmenu.place(x = 435, y = 320, width = 90)
 imagem = Image.open(icone_limpar)
 imagem = imagem.resize((30, 30))
 tkimage = ImageTk.PhotoImage(imagem)
-btnlimpar = tk.Button(tela_cli, text ="Limpar",image=tkimage, compound='left', foreground='black', font=('Roboto', 12), command=limpar)
+btnlimpar = tk.Button(tela_cli, text ="Limpar",image=tkimage, compound='left', foreground='black', font=('Roboto', 12), command=limpar, underline=0)
 btnlimpar.image = tkimage
 btnlimpar.pack(pady=20)
 PosicionaBotao(tela_cli, btnmenu, btnlimpar)
@@ -192,7 +192,7 @@ PosicionaBotao(tela_cli, btnmenu, btnlimpar)
 imagem = Image.open(icone_excluir)
 imagem = imagem.resize((30, 30))
 tkimage = ImageTk.PhotoImage(imagem)
-btnexcluir = tk.Button(tela_cli, text ="Excluir",image=tkimage, compound='left', foreground='black', font=('Roboto', 12), command=excluir)
+btnexcluir = tk.Button(tela_cli, text ="Excluir",image=tkimage, compound='left', foreground='black', font=('Roboto', 12), command=excluir, underline=0)
 btnexcluir.image = tkimage
 btnexcluir.pack(pady=20)
 PosicionaBotao(tela_cli, btnlimpar, btnexcluir)
@@ -207,7 +207,7 @@ txt_pes_nome.place(x = 315, y = 390, width = 360, height = 25)
 imagem = Image.open(icone_gravar)
 imagem = imagem.resize((30, 30))
 tkimage = ImageTk.PhotoImage(imagem)
-btngravar = tk.Button(tela_cli, text ="Gravar",image=tkimage, compound='left', foreground='black', font=('Roboto', 12), command=gravar)
+btngravar = tk.Button(tela_cli, text ="Gravar",image=tkimage, compound='left', foreground='black', font=('Roboto', 12), command=gravar, underline=0)
 btngravar.image = tkimage
 btngravar.pack(pady=20)
 PosicionaBotao(tela_cli, btnexcluir, btngravar)
@@ -249,6 +249,13 @@ scrollbar.place(x = 982, y = 450,height=150)
 visualizar()
 
 txtcodigo.focus_set()
+
+tela_cli.bind_all("<Alt-m>", lambda e: menu())
+tela_cli.bind_all("<Alt-l>", lambda e: limpar())
+tela_cli.bind_all("<Alt-e>", lambda e: excluir())
+tela_cli.bind_all("<Alt-g>", lambda e: gravar())
+
+tela_cli.bind('<Escape>', lambda event: fechar_tela(tela_cli))
 
 #Mantêm a tela_cli em Execução
 tela_cli.mainloop()

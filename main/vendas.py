@@ -2,7 +2,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
-from funcoes import clientes, sair, sobre, MontaTela, PosicionaBotao, CriarBotao
+from funcoes import clientes, sair, sobre, MontaTela, PosicionaBotao, CriarBotao, fechar_tela
 from vars import *
 
 cor = "WhiteSmoke"
@@ -22,6 +22,8 @@ btnmenu.image = tkimage
 btnmenu.pack(pady=20)
 btnmenu.place(x = 5, y = 10, width = 90)
 #Botão Menu
+
+tela_vendas.bind('<Escape>', lambda event: fechar_tela(tela_vendas))
 
 #Mantêm a tela_cli em Execução
 tela_vendas.mainloop()

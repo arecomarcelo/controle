@@ -53,74 +53,56 @@ def visualizar():
     
     for linha in rs:
         tree.insert("", tk.END,values=linha) 
-    
-def pesquisar_nome(p):
-    ...
-    # con=cn.conexao()
-    # sql_txt = f"select * from clientes where nome like '%{p}%'"
-    
-    # rs=con.consultar_tree(sql_txt)
-
-    # tree.bind("<Double-1>", duplo_click)
-    
-    # for linha in tree.get_children():
-    #     tree.delete(linha)
-    
-    # for linha in rs:
-    #     tree.insert("", tk.END, values=linha)
-
-    # con.fechar()   
-
-    # return True    
+     
     
 def gravar():
-    ...
-    # var_codigo = txtcodigo.get()
-    # var_nome = txtnome.get()
-    # var_telefone = txttelefone.get()
-    # var_email = txtemail.get()
-    # var_observacao = txtobservacao.get("1.0","end")
 
-    # con=cn.conexao()
-    # sql_txt = f"select codigo,nome,telefone,email,observacao from clientes where codigo = {var_codigo}"
+    var_usuario = txtUsuario.get()
+    var_nome = txtNome.get()
+    var_senha = txtsenha.get()
+ 
+    con=cn.conexao()
+    
+    sql_txt = f"select usuario,nome,senha from login where usuario = '{var_usuario}'"
 
-    # rs=con.consultar(sql_txt)
+    rs=con.consultar(sql_txt)
 
-    # if rs:
-    #     sql_text = f"update clientes set nome='{var_nome}',telefone='{var_telefone}',email='{var_email}',observacao='{var_observacao}' where codigo = '{var_codigo}'"
-    # else:
-    #     sql_text = f"insert into clientes(codigo,nome,telefone,email,observacao) values ({var_codigo},'{var_nome}','{var_telefone}','{var_email}','{var_observacao}')"
+    if rs:
+        sql_text = f"update login set usuario='{var_usuario}',nome='{var_nome}',senha = aes_encrypt('{var_senha}','chave') where usuario = '{var_usuario}'"
+    else:
+        sql_text = f"insert into login(usuario,nome,senha) values ('{var_usuario}','{var_nome}',aes_encrypt('{var_senha}','chave'))"
 
-    # print(sql_text)
-    # if con.gravar(sql_text):
-    #     messagebox.showinfo("Aviso", "Item Gravado com Sucesso", parent = tela_cli)
-    #     limpar()
-    # else:
-    #     messagebox.showerror("Erro", "Houve um Erro na Gravação", parent = tela_cli)
+    if con.gravar(sql_text):
+        messagebox.showinfo("Aviso", "Item Gravado com Sucesso")
+        limpar()
+    else:
+        messagebox.showerror("Erro", "Houve um Erro na Gravação")
 
-    # con.fechar()
-
-    # visualizar()    
+    con.fechar()
+    
+    visualizar()
+	
+	
+	
 
 def excluir():
-    ...
-    # var_del = messagebox.askyesno("Exclusão", "Tem certeza que deseja excluir?", parent = tela_cli)
-    # if var_del == True:
-    #     var_codigo = txtcodigo.get()
+    var_del = messagebox.askyesno("Exclusão", "Tem certeza que deseja excluir?")
+    if var_del == True:
+        var_usuario = txtUsuario.get()
 
-    #     con=cn.conexao()
-    #     sql_text = f"delete from clientes where codigo = '{var_codigo}'"
-    #     if con.gravar(sql_text):
-    #           messagebox.showinfo("Aviso", "Item Excluído com Sucesso",parent = tela_cli)
-    #           limpar()
-    #     else:
-    #         messagebox.showerror("Erro", "Houve um Erro na Exclusão",parent = tela_cli)
+        con=cn.conexao()
+        sql_text = f"delete from login where usuario = '{var_usuario}'"
+        if con.gravar(sql_text):
+              messagebox.showinfo("Aviso", "Item Excluído com Sucesso")
+              limpar()
+        else:
+            messagebox.showerror("Erro", "Houve um Erro na Exclusão")
             
-    #     con.fechar()
+        con.fechar()
 
-    #     visualizar()
-    # else:
-    #     limpar()
+        visualizar()
+    else:
+        limpar()
         
 def menu():
     tela_usuario.destroy()
@@ -191,7 +173,7 @@ PosicionaBotao(tela_usuario, btnexcluir, btngravar)
 #Botão Gravar
 
 buscabtn = tk.Button(tela_usuario, text ="Pesquisar", 
-                      bg ='white',foreground='black', font=('Calibri', 12, 'bold'))
+                      bg ='white',foreground='black', font=('Calibri', 12, 'bold'), command=buscar)
 buscabtn.place(x = 280, y = 60, width = 90, height=25)
 
 ##Implementa Controles
@@ -231,6 +213,7 @@ tree.configure(yscroll=scrollbar.set)
 scrollbar.place(x = 810, y = 230 , height=200)
 
 txtUsuario.focus_set()
+visualizar()
 
 ##Configura Atalhos
 tela_usuario.bind_all("<Alt-m>", lambda e: menu())

@@ -5,6 +5,12 @@ from PIL import Image, ImageTk
 from enumeradores import Direcao
 from vars import nome_aplicacao, img_icone_principal
 
+class Error(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+    def __str__(self):
+        return repr(self.msg)
+
 def LimparConsole():
     os.system('cls')
     

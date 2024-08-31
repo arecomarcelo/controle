@@ -67,10 +67,12 @@ caminhoAplicacao = f"{os.path.dirname(os.path.dirname(__file__))}\\"
 caminhoImagens = caminhoAplicacao.replace(r'/', "\\") + 'imagens\\'
 
 # -- Variáveis de Imagens ---    ############################
-img_icone_principal = f"{caminhoImagens}icone.ico"
+img_icone_principal = f"{caminhoImagens}icone transparente.ico"
 img_desktop = f"{caminhoImagens}wallpaper2.png"
 img_em_construcao = f"{caminhoImagens}construcao.png"
-img_background = f"{caminhoImagens}wallpaper.png"
+# img_background = f"{caminhoImagens}background.png"
+# img_background = f"{caminhoImagens}fundo02.png"
+img_background = f"{caminhoImagens}hauxwalpaper01.png"
 icone_voltar = f"{caminhoImagens}voltar.png"
 icone_limpar = f"{caminhoImagens}limpar.png"
 icone_excluir = f"{caminhoImagens}excluir.png"

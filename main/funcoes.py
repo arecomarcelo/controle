@@ -40,8 +40,7 @@ def MontaTela(cor_fundo, imagem, titulo, principal = False):
     else:
         tela = tk.Toplevel()    
         
-    # tela.geometry('1960x800+0+0')
-    tela.geometry('1366x768+0+0')
+    tela.geometry('1960x800+0+0')
     tela.state('zoomed')
     tela.title(f"{nome_aplicacao} - {titulo}")
     tela['bg'] = cor_fundo

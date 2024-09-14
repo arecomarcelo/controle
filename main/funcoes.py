@@ -26,7 +26,7 @@ def PosicionaBotao (tela, botao_anterior, botao_atual, direcao = Direcao.DIREITA
     
     posy = botao_anterior.winfo_y()    
     
-    botao_atual.place(x = posx, y = posy, width = 90)         
+    botao_atual.place(x = posx, y = posy, width = 100)         
 
 def AbreTela(arquivo):
     exec(open(f"main\\{arquivo}", encoding="utf-8").read(),locals())
